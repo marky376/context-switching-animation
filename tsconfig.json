@@ -2,13 +2,21 @@
     "include": [
         "./src/**/*"
     ],
+    "exclude": [
+        "node_modules"
+    ],
     "compilerOptions": {
+        "target": "ES6",
+        "module": "ESNext",
         "strict": true,
         "esModuleInterop": true,
         "lib": [
             "dom",
             "es2015"
         ],
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        "moduleResolution": "node" ,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
     }
 }

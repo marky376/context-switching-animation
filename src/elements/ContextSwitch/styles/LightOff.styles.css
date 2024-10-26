@@ -1,0 +1,69 @@
+.ContextSwitch:not(.on) .ContextSwitch_Light {
+    position: absolute;
+    display: block;
+    height: calc(50% - var(--inner-size) * 4);
+    width: 100%;
+    border-radius: calc(var(--border-radius) - var(--inner-size));
+    transition: all var(--transition-duration) ease-in;
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Light:before,
+  .ContextSwitch:not(.on) .ContextSwitch_Light:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: inherit;
+    transition: all var(--transition-duration) ease-in;
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Light:after {
+    background: var(--color);
+    width: calc(100% + 0.1em);
+    height: calc(100% + 0.1em);
+    right: -0.05em;
+    filter: blur(20px);
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Light:before {
+    background: var(--sun-color);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    filter: blur(10px);
+    z-index: var(--border-index);
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Light--bottom:after {
+    bottom: -0.075em;
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Light--top:after {
+    top: -0.075em;
+  }
+  
+  /* Checked */
+  .ContextSwitch:not(.on).checked .ContextSwitch_Light--top {
+    opacity: 0;
+  }
+  
+  .ContextSwitch:not(.on).checked .ContextSwitch_Light--bottom {
+    bottom: 0;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    box-shadow: 0 0 50px rgb(255, 55, 0), 0 10px 100px rgb(255, 0, 0),
+      0 100px 100px rgba(255, 55, 0, 0.25);
+  }
+  
+  /* Not Checked */
+  .ContextSwitch:not(.on):not(.checked) .ContextSwitch_Light--bottom {
+    opacity: 0;
+  }
+  
+  .ContextSwitch:not(.on):not(.checked) .ContextSwitch_Light--top {
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    box-shadow: 0 0 50px rgb(255, 55, 0), 0 -10px 100px rgb(255, 0, 0),
+      0 -100px 100px rgba(255, 55, 0, 0.25);
+  }
+  

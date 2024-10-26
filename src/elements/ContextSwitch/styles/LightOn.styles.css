@@ -1,0 +1,61 @@
+.ContextSwitch:is(.on) .ContextSwitch_Light {
+    position: absolute;
+    display: block;
+    width: calc(100% - var(--inner-size) * 3);
+    left: calc(var(--inner-size) * 1.5);
+    height: calc(65% - var(--inner-size) * 4);
+    border-radius: calc(var(--border-radius) - var(--inner-size));
+    transition: all var(--transition-duration) ease-in;
+    opacity: 0;
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Light:before,
+  .ContextSwitch:is(.on) .ContextSwitch_Light:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: inherit;
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Light:before {
+    background: var(--light-color);
+    width: 90%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    filter: blur(10px);
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Light:after {
+    background: var(--lighter-color);
+    width: calc(90% + 0.1em);
+    height: calc(100% + 0.1em);
+    top: -0.05em;
+    right: -0.05em;
+    filter: blur(25px);
+    opacity: 0.5;
+    z-index: var(--fill-index);
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Light--top {
+    top: calc(var(--inner-size));
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Light--bottom {
+    bottom: calc(var(--inner-size));
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+  }
+  
+  /* Not Checked */
+  .ContextSwitch:is(.on):not(.checked) .ContextSwitch_Light--top {
+    opacity: 1;
+  }
+  
+  /* Checked */
+  .ContextSwitch:is(.on).checked .ContextSwitch_Light--bottom {
+    opacity: 1;
+  }
+  

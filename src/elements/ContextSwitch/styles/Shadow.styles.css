@@ -1,0 +1,70 @@
+.ContextSwitch:is(.on) .ContextSwitch_Shadow {
+    position: absolute;
+    display: block;
+    left: calc(var(--inner-size));
+    width: calc(100% - var(--inner-size) * 2);
+    height: calc(100% - var(--inner-size) * 4);
+    border-radius: calc(var(--border-radius) - var(--inner-size));
+    z-index: var(--shadow-index);
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Shadow:after,
+  .ContextSwitch:is(.on) .ContextSwitch_Shadow:before {
+    background: black;
+    filter: blur(3px);
+    position: absolute;
+    content: "";
+    display: block;
+    left: 0;
+    opacity: 0;
+    display: block;
+    width: calc(60% - var(--inner-size) * 2);
+    border-radius: calc(var(--border-radius) - var(--inner-size) * 2);
+    height: 47%;
+    transition: all var(--transition-duration) ease-in;
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Shadow--bottom:before,
+  .ContextSwitch:is(.on) .ContextSwitch_Shadow--bottom:after {
+    top: calc(50% + var(--inner-size) * 2 + -0.05em);
+  }
+  
+  .ContextSwitch:is(.on) .ContextSwitch_Shadow--top:before,
+  .ContextSwitch:is(.on) .ContextSwitch_Shadow--top:after {
+    bottom: calc(50% + var(--inner-size) * 2 + -0.05em);
+  }
+  
+  /* Checked */
+  .ContextSwitch:is(.on):not(.checked) .ContextSwitch_Shadow--top:before {
+    bottom: calc(50% + var(--inner-size) * 2 + -0.05em);
+    left: -0.1em;
+    transform: skew(0.06turn, -10deg);
+    opacity: 0.5;
+    filter: blur(0.1em);
+  }
+  
+  .ContextSwitch:is(.on):not(.checked) .ContextSwitch_Shadow--top:after {
+    bottom: calc(50% + var(--inner-size) * 2 + -0.05em);
+    left: -0.05em;
+    opacity: 0.65;
+    transform: skew(0.02turn, -10deg);
+    filter: blur(0.048em);
+  }
+  
+  /* Not Checked */
+  .ContextSwitch:is(.checked) .ContextSwitch_Shadow--bottom:before {
+    top: calc(50% + var(--inner-size) * 2 + -0.05em);
+    left: -0.1em;
+    transform: skew(-0.06turn, 10deg);
+    opacity: 0.5;
+    filter: blur(0.1em);
+  }
+  
+  .ContextSwitch:is(.checked) .ContextSwitch_Shadow--bottom:after {
+    top: calc(50% + var(--inner-size) * 2 + -0.05em);
+    left: -0.05em;
+    opacity: 0.65;
+    transform: skew(-0.02turn, 10deg);
+    filter: blur(0.048em);
+  }
+  

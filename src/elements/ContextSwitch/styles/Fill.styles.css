@@ -1,0 +1,20 @@
+.ContextSwitch .ContextSwitch_Fill {
+    --fill-background: linear-gradient(
+      to right,
+      var(--dark-color),
+      var(--color),
+      var(--light-color)
+    );
+  
+    background-image: var(--fill-background);
+    position: absolute;
+    left: calc(var(--inner-size) * 1.5);
+    bottom: calc(var(--inner-size));
+    display: block;
+    width: calc(100% - var(--inner-size) * 3);
+    height: calc(100% - var(--inner-size) * 4);
+    border-radius: calc(var(--border-radius) - var(--inner-size));
+    transition: all var(--transition-duration) ease-in;
+    z-index: var(--fill-index);
+  }
+  

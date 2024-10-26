@@ -1,0 +1,87 @@
+.ContextSwitch:not(.on) .ContextSwitch_Toggle {
+    --variant-background: color-mix(
+      in srgb,
+      var(--background),
+      black var(--background-darken)
+    );
+    --variant-dark-background: color-mix(
+      in srgb,
+      var(--background),
+      black calc(var(--background-darken) * 1.5)
+    );
+  
+    position: absolute;
+    left: var(--inner-size);
+    display: block;
+    width: calc(100% - var(--inner-size) * 2);
+    height: calc(100% - var(--inner-size) * 3);
+    border-radius: calc(var(--border-radius) - var(--inner-size));
+    transition: height var(--transition-duration) ease-in;
+    z-index: var(--toggle-index);
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:before,
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:after {
+    background: var(--background);
+    position: absolute;
+    content: "";
+    display: block;
+    left: calc(var(--inner-size));
+    display: block;
+    width: calc(100% - var(--inner-size) * 2);
+    border-radius: calc(var(--border-radius) - var(--inner-size) * 2);
+    transition: all var(--transition-duration) ease-in;
+    z-index: var(--toggle-index);
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:before {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:after {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:after {
+    background: var(--variant-dark-background);
+  }
+  
+  /* Active */
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle {
+    background: var(--background);
+    top: calc(var(--inner-size));
+    height: calc(100% - var(--inner-size) * 2);
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:before {
+    background: transparent;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    border-radius: calc(var(--border-radius) - var(--inner-size));
+    box-shadow: inset 0 0 calc(var(--inner-size) * 5) var(--light-color),
+      inset 0 0 calc(var(--inner-size) * 7) var(--burn-color);
+  }
+  
+  .ContextSwitch:not(.on) .ContextSwitch_Toggle:after {
+    top: 50%;
+    height: 50%;
+    width: 100%;
+    left: 0;
+    border-bottom-left-radius: calc(var(--border-radius) - var(--inner-size));
+    border-bottom-right-radius: calc(var(--border-radius) - var(--inner-size));
+    z-index: -1;
+  }
+  
+  .ContextSwitch:not(.on):not(.checked) .ContextSwitch_Toggle:after {
+    background: var(--variant-background);
+  }
+  
+  /* Inactive */
+  .ContextSwitch:not(.on).checked .ContextSwitch_Toggle:before {
+    height: calc(100% - var(--inner-size));
+  }
+  
