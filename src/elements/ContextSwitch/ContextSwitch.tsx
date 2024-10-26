@@ -1,11 +1,5 @@
 import React from "react";
 import "./ContextSwitch.styles.css";
-import "./styles/Shadow.styles.css";
-import "./styles/ToggleOn.styles.css";
-import "./styles/ToggleOff.styles.css";
-import "./styles/Fill.styles.css";
-import "./styles/LightOn.styles.css";
-import "./styles/LightOff.styles.css";
 import clsx from "clsx";
 
 type ContextSwitchProps = React.PropsWithChildren<{
@@ -23,22 +17,20 @@ const ContextSwitch = ({
 }: ContextSwitchProps) => {
   const rootRef = React.useRef<HTMLDivElement>(null);
   const [isOn, setIsOn] = React.useState(defaultOn);
-  const timer = React.useRef(0);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
   const isControlled = on !== undefined;
   const isLocalOn = React.useMemo(() => (isControlled ? on : isOn), [on, isOn]);
-  const [isChecked, setIsChecked] = React.useState(isLocalOn);
 
-  console.log("isLocalOn", { isLocalOn });
-
-  const onClick = React.useCallback(
+  const handleToggle = React.useCallback(
     (value: boolean) => {
-      console.log("isLocalOn", { value, isChecked, isLocalOn, isControlled });
-      if (value === isChecked) return;
+      if (value === isLocalOn) return;
 
       if (timer.current) clearTimeout(timer.current);
 
       timer.current = setTimeout(() => {
         if (!rootRef.current) return;
+
+        // Set transition duration to zero to prevent flickering
         rootRef.current.style.setProperty("--transition-duration", "0");
 
         if (!isControlled) {
@@ -47,32 +39,28 @@ const ContextSwitch = ({
           onChange?.(!value);
         }
 
+        // Reset transition duration after state change
         setTimeout(() => {
           if (!rootRef.current) return;
-          rootRef.current?.style.setProperty("--transition-duration", "");
+          rootRef.current.style.setProperty("--transition-duration", "");
         }, 100);
       }, 500);
 
-      setIsChecked(value);
+      // This will set the current state
+      setIsOn(value);
     },
-    [isLocalOn, isChecked, onChange]
+    [isLocalOn, isControlled, onChange]
   );
 
   return (
     <div
       ref={rootRef}
-      className={clsx(
-        "ContextSwitch",
-        isChecked && "checked",
-        isLocalOn && "on"
-      )}
+      className={clsx("ContextSwitch", isLocalOn && "on")}
       {...props}
     >
       <span className="ContextSwitch_Shadow ContextSwitch_Shadow--top" />
       <span className="ContextSwitch_Shadow ContextSwitch_Shadow--bottom" />
-
       <span className="ContextSwitch_Fill" />
-
       <span className="ContextSwitch_Light ContextSwitch_Light--top" />
       <span className="ContextSwitch_Light ContextSwitch_Light--bottom" />
 
@@ -82,7 +70,7 @@ const ContextSwitch = ({
             hidden
             type="checkbox"
             checked={isLocalOn}
-            onChange={() => {}}
+            readOnly
           />
           <span>{children}</span>
         </label>
@@ -90,11 +78,11 @@ const ContextSwitch = ({
 
       <span
         className="ContextSwitch_Trigger ContextSwitch_Trigger--top"
-        onClick={() => onClick(true)}
+        onClick={() => handleToggle(true)}
       />
       <span
         className="ContextSwitch_Trigger ContextSwitch_Trigger--bottom"
-        onClick={() => onClick(false)}
+        onClick={() => handleToggle(false)}
       />
 
       <span className="ContextSwitch_Line" />
