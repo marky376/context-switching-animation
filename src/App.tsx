@@ -10,10 +10,10 @@ export default function App() {
 
   const handleChange = React.useCallback<(isOn: boolean) => void>(
     (isOn) => {
-      setDarkMode(() => isOn);
+      setDarkMode(isOn);
       document.documentElement.classList.toggle("dark", isOn);
     },
-    []
+    [darkMode]
   );
 
   return (

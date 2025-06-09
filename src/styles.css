@@ -35,7 +35,3 @@ body,
   left: 580px;
   transform: translate(-50%, -50%);
 }
-
-.dark .img {
-  display: block;
-}
